@@ -1,9 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_portfolio/constants/colors.dart';
 import 'package:my_portfolio/constants/size.dart';
 import 'package:my_portfolio/widgets/drawer_mobile.dart';
 import 'package:my_portfolio/widgets/header_mobile.dart';
 import 'package:my_portfolio/widgets/main_desktop.dart';
+import 'package:my_portfolio/widgets/main_mobile.dart';
 import '../widgets/header_desktop.dart';
 
 class HomePage extends StatefulWidget {
@@ -20,6 +22,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     final screenWidth = screenSize.width;
+    final screenHeight = screenSize.height;
 
     return LayoutBuilder(builder: (context, constraints) {
       return Scaffold(
@@ -42,7 +45,11 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
             // MAIN_DESKTOP
-            const MainDesktop(),
+            // const MainDesktop(),
+            if (constraints.maxWidth >= kMinDesktopWidth)
+              const MainDesktop()
+            else
+              const MainMobile(),
             //PROJECTS
             Container(
               height: 500,
