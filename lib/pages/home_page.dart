@@ -3,7 +3,7 @@ import 'package:my_portfolio/constants/colors.dart';
 import 'package:my_portfolio/constants/size.dart';
 import 'package:my_portfolio/widgets/drawer_mobile.dart';
 import 'package:my_portfolio/widgets/header_mobile.dart';
-
+import 'package:my_portfolio/widgets/main_desktop.dart';
 import '../widgets/header_desktop.dart';
 
 class HomePage extends StatefulWidget {
@@ -18,11 +18,16 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+    final screenWidth = screenSize.width;
+
     return LayoutBuilder(builder: (context, constraints) {
       return Scaffold(
         key: scaffoldKey,
         backgroundColor: CustomColor.scaffoldBg,
-        endDrawer: constraints.maxWidth >= kMinDesktopWidth ? null : const DrawerMobile(),
+        endDrawer: constraints.maxWidth >= kMinDesktopWidth
+            ? null
+            : const DrawerMobile(),
         body: ListView(
           scrollDirection: Axis.vertical,
           children: [
@@ -36,12 +41,8 @@ class _HomePageState extends State<HomePage> {
                   scaffoldKey.currentState?.openEndDrawer();
                 },
               ),
-            //SKILLS
-            Container(
-              height: 500,
-              width: double.maxFinite,
-              color: Colors.blueGrey,
-            ),
+            // MAIN_DESKTOP
+            const MainDesktop(),
             //PROJECTS
             Container(
               height: 500,
